@@ -61,6 +61,15 @@ async function run() {
         res.send(coursesData);
       })
 
+      app.patch('/courses/:id', async (req,res)=>{
+        const id = req.params.id;
+        const updatedData = req.body;
+        const result = await courses.updateOne({_id:new ObjectId(id)},
+        {set: updatedData}
+      );
+        res.send(result);
+      })
+
       app.delete('/courses/:id', async (req,res)=>{
         const id = req.params.id;
         const result = courses.deleteOne({_id:new ObjectId(id)});
